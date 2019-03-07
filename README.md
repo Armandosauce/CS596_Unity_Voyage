@@ -1,19 +1,20 @@
-Title:
+Title
 ======
 ??
 
-Team:
+Team
 =====
 04
 
-Members:
+Members
 ========
 Anthony Reese
-Armando Perez
-Irina Brigado Chan
-Dwayne Wilkes
 
-=================================================
+Armando Perez
+
+Irina Brigido Chan
+
+Dwayne Wilkes
 
 **Controls**
 ------------
