@@ -13,8 +13,6 @@ Armando Perez
 Irina Brigado Chan
 Dwayne Wilkes
 
-=================================================
-
 **Controls**
 ------------
 
