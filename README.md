@@ -9,8 +9,11 @@ Team
 Members
 ========
 Anthony Reese
+
 Armando Perez
-Irina Brigado Chan
+
+Irina Brigido Chan
+
 Dwayne Wilkes
 
 **Controls**
