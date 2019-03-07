@@ -1,12 +1,12 @@
-Title:
+Title
 ======
 ??
 
-Team:
+Team
 =====
 04
 
-Members:
+Members
 ========
 Anthony Reese
 Armando Perez
