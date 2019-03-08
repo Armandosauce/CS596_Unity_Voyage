@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float moveSpeed;
+    public float walkSpeed;
+    public float runSpeed;
     public float jumpHeight;
     public float gravity;
     public Vector3 drag;
@@ -12,6 +13,8 @@ public class PlayerMovement : MonoBehaviour
     private CharacterController _controller;
     private Vector3 _velocity;
     private PlayerInputController input;
+    private Vector3 previousPos;
+    private float moveSpeed;
     
     void Start()
     {
@@ -28,6 +31,15 @@ public class PlayerMovement : MonoBehaviour
                 _velocity.y += Mathf.Sqrt(jumpHeight * -2f * gravity);
         }
 
+        if (input.Current.RunInput)
+        {
+            moveSpeed = runSpeed;
+        }
+        else
+        {
+            moveSpeed = walkSpeed;
+        }
+
         _controller.Move(input.Current.MoveInput * Time.deltaTime * moveSpeed);
         if (input.Current.MoveInput != Vector3.zero)
             transform.forward = input.Current.MoveInput;
@@ -39,6 +51,11 @@ public class PlayerMovement : MonoBehaviour
         _velocity.z /= 1 + drag.z * Time.deltaTime;
 
         _controller.Move(_velocity * Time.deltaTime);
+    }
+
+    public Vector3 getVelocity()
+    {
+        return _controller.velocity;
     }
 
 }

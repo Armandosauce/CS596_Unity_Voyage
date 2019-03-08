@@ -7,6 +7,7 @@ public struct PlayerInput
     public Vector3 MoveInput;
     public Vector2 MouseInput;
     public bool JumpInput;
+    public bool RunInput;
 }
 
 public class PlayerInputController : MonoBehaviour {
@@ -15,6 +16,7 @@ public class PlayerInputController : MonoBehaviour {
     private Vector3 moveInput;
     private Vector2 mouseInput;
     private bool jumpInput;
+    private bool runInput;
 
 	// Use this for initialization
 	void Start () {
@@ -26,15 +28,18 @@ public class PlayerInputController : MonoBehaviour {
 
         moveInput = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical")).normalized;
 
-        Vector2 mouseInput = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
+        mouseInput = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
 
-        bool jumpInput = Input.GetButtonDown("Jump");
+        jumpInput = Input.GetButtonDown("Jump");
+
+        runInput = Input.GetButton("Run");
 
         Current = new PlayerInput()
         {
             MoveInput = moveInput,
             MouseInput = mouseInput,
-            JumpInput = jumpInput
+            JumpInput = jumpInput,
+            RunInput = runInput
         };
 	}
 }
