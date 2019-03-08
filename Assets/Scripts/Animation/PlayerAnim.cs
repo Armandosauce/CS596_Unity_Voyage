@@ -9,30 +9,29 @@ public class PlayerAnim : MonoBehaviour {
     public Animator anim;
 
     private PlayerInputController input;
-    private PlayerMovement move;
+    private PlayerMovement player;
     private float animDefaultSpeed;
-
+    
     private void Start()
     {
         input = GetComponent<PlayerInputController>();
-        move = GetComponent<PlayerMovement>();
+        player = GetComponent<PlayerMovement>();
         animDefaultSpeed = anim.speed;
+
     }
 
     // Update is called once per frame
     void Update () {
-
-        if(input.Current.RunInput)
+    
+        if (input.Current.RunInput)
         {
-            anim.speed *= 3;
+            anim.speed = 2 * animDefaultSpeed;
         }
         else
         {
             anim.speed = animDefaultSpeed;
         }
-
-
-
+        
         if (input.Current.MoveInput != Vector3.zero)
         {
             anim.SetBool("isRunning", true);
@@ -42,16 +41,8 @@ public class PlayerAnim : MonoBehaviour {
             anim.SetBool("isRunning", false);
             
         }
-
-        Debug.Log(move.getVelocity().y);
-        if(move.getVelocity().y <= move.gravity / 4 )
-        {
-            anim.SetBool("isFalling", true);
-        }
-        else
-        {
-            anim.SetBool("isFalling", false);
-        }
-
+        
 	}
+
+    
 }
