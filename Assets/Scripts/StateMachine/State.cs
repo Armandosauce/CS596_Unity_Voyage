@@ -3,37 +3,61 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class State
+[CreateAssetMenu]
+public class State : MonoBehaviour
 {
-    private StateMachine Machine { get; set; }
-
-    public State()
-    {
-
-    }
+    protected StateMachine Machine;
 
     public static implicit operator bool(State state)
     {
         return state != null;
     }
 
-    public virtual void OnStateInitialize(StateMachine machine)
+    public void Initialize(StateMachine machine)
     {
         Machine = machine;
+        OnStateInitialize(machine);
     }
 
-    public virtual void OnStateEnter()
+    protected virtual void OnStateInitialize(StateMachine machine = null)
     {
-
     }
 
-    public virtual void OnStateExit()
+    public void StateEnter()
     {
-
+        enabled = true;
+        OnStateEnter();
     }
 
-    public virtual void Update()
+    protected virtual void OnStateEnter()
     {
+    }
 
+    public void StateExit()
+    {
+        OnStateExit();
+        enabled = false;
+    }
+
+    protected virtual void OnStateExit()
+    {
+    }
+
+    public void OnEnable()
+    {
+        if (this != Machine.GetCurrentState)
+        {
+            enabled = false;
+            Debug.LogWarning("Do not enable States directly. Use StateMachine.SetState");
+        }
+    }
+
+    public void OnDisable()
+    {
+        if (this == Machine.GetCurrentState)
+        {
+            enabled = true;
+            Debug.LogWarning("Do not disable States directly. Use StateMachine.SetState");
+        }
     }
 }

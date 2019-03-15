@@ -3,17 +3,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
 public class StateMachine : MonoBehaviour
 {
 
-    protected List<State> statesList = new List<State>();
+    public List<State> statesList = new List<State>();
+    public State StartingState;
     protected State currentState;
 
-    void Update()
+    public void Start()
     {
-        currentState.Update();
+        SetState(StartingState);
     }
+
+    public State GetCurrentState { get { return currentState; } }
 
     /// <summary>
     /// Switch the currentState to a specific State object
@@ -21,18 +23,24 @@ public class StateMachine : MonoBehaviour
     /// <param name="state">
     /// The state object to set as the currentState</param>
     /// <returns>Whether the state was changed</returns>
-    protected virtual bool SwitchState(State state)
+    public virtual bool SetState(State state)
     {
         bool success = false;
         if (state && state != currentState)
         {
-            if (currentState)
-                currentState.OnStateExit();
+            State oldState = currentState;
             currentState = state;
-            currentState.OnStateEnter();
+            if (oldState)
+                oldState.StateExit();
+            currentState.StateEnter();
             success = true;
         }
         return success;
+    }
+
+    public void setState(State state)
+    {
+        SetState(state);
     }
 
     /// <summary>
@@ -41,30 +49,36 @@ public class StateMachine : MonoBehaviour
     /// <typeparam name="StateType">
     /// The type of state to use for the currentState</typeparam>
     /// <returns>Whether the state was changed</returns>
-    public virtual bool SwitchState<StateType>() where StateType : State, new()
+    public virtual bool SetState<StateType>() where StateType : State
     {
         bool success = false;
-        bool found = false;
         //if the state can be found in the list of states 
         //already created, switch to the existing version
         foreach (State state in statesList)
         {
             if (state is StateType)
             {
-                found = true;
-                success = SwitchState(state);
-                break;
+                success = SetState(state);
+                return success;
             }
         }
-        //if the state is not found in the list, 
-        //make a new instance
-        if (!found)
+        //if the state is not found in the list,
+        //see if it is on the gameobject.
+        State stateComponent = GetComponent<StateType>();
+        if (stateComponent)
         {
-            State newState = new StateType();
-            newState.OnStateInitialize(this);
-            statesList.Add(newState);
-            success = SwitchState(newState);
+            stateComponent.Initialize(this);
+            statesList.Add(stateComponent);
+            success = SetState(stateComponent);
+            return success;
         }
+        //if it is not on the gameobject,
+        //make a new instance
+        State newState = gameObject.AddComponent<StateType>();
+        newState.Initialize(this);
+        statesList.Add(newState);
+        success = SetState(newState);
+
         return success;
     }
 }

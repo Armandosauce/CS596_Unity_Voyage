@@ -67,13 +67,9 @@ public class PlayerMovement : MonoBehaviour
         {
             _velocity.y += gravity * Time.deltaTime;
         }
-        else
-        {
-            _velocity.y = 0;
-        }
 
         if (input.Current.JumpInput && _isGrounded) {
-            _velocity.y += Mathf.Sqrt(jumpHeight * -2f * gravity);
+            _velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
         }
 
         if (input.Current.RunInput)
