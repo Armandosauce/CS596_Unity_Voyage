@@ -35,9 +35,11 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        #region Jump
         _isGrounded = Physics.CheckSphere(_groundCheck.position, groundDist, ground, QueryTriggerInteraction.Ignore);
-        Debug.Log(_isGrounded);
+
+        /*
+        #region Jump
+        
         jumpPressedRemember -= Time.deltaTime;
         groundedRemember -= Time.deltaTime;
 
@@ -50,14 +52,30 @@ public class PlayerMovement : MonoBehaviour
             jumpPressedRemember = jumpPressedRememberTime;
         }
 
+        Debug.Log(groundedRemember.ToString() + ", " + jumpPressedRemember.ToString());
         if ((groundedRemember > 0) && (jumpPressedRemember > 0)) {
+            _velocity.y += Mathf.Sqrt(jumpHeight * -2f * gravity);
             groundedRemember = 0;
             jumpPressedRemember = 0;
-            _velocity.y += Mathf.Sqrt(jumpHeight * -2f * gravity);
         }
 
         #endregion
         
+        */
+
+        if (!_isGrounded)
+        {
+            _velocity.y += gravity * Time.deltaTime;
+        }
+        else
+        {
+            _velocity.y = 0;
+        }
+
+        if (input.Current.JumpInput && _isGrounded) {
+            _velocity.y += Mathf.Sqrt(jumpHeight * -2f * gravity);
+        }
+
         if (input.Current.RunInput)
         {
             moveSpeed = runSpeed;
@@ -67,16 +85,16 @@ public class PlayerMovement : MonoBehaviour
             moveSpeed = walkSpeed;
         }
 
-        _controller.Move(input.Current.MoveInput * Time.deltaTime * moveSpeed);
         if (input.Current.MoveInput != Vector3.zero)
             transform.forward = input.Current.MoveInput;
-        
-        _velocity.y += gravity * Time.deltaTime;
 
         _velocity.x /= 1 + drag.x * Time.deltaTime;
         _velocity.y /= 1 + drag.y * Time.deltaTime;
         _velocity.z /= 1 + drag.z * Time.deltaTime;
 
+        _velocity.x = input.Current.MoveInput.x * moveSpeed;
+        _velocity.z = input.Current.MoveInput.z * moveSpeed;
+        
         _controller.Move(_velocity * Time.deltaTime);
         
        // orientPlayer();

@@ -1,0 +1,62 @@
+[33mcommit f22048ee1b02407cc39590288a274dd0388c8231[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m)[m
+Author: Irina Brigido Chan <irinabchan@gmail.com>
+Date:   Fri Mar 8 08:25:02 2019 -0800
+
+    Update .gitignore to include meta files and other user settings
+
+[33mcommit 400f749a020e9245f3018bd649f01bd5497014fd[m
+Author: Armando Perez <armandoperez0001@gmail.com>
+Date:   Thu Mar 7 19:11:02 2019 -0800
+
+    fixed some animation errors, and smoothed animation transitions
+
+[33mcommit 56c9b14f0a6b7115fa54096659bcbcdb63fe3f1a[m
+Author: Armando Perez <armandoperez0001@gmail.com>
+Date:   Thu Mar 7 17:16:47 2019 -0800
+
+    added a player model. model was downloaded from itch.io for free, colors were changed to keep player model simple. Created animation tree
+
+[33mcommit ed4b744c9a148bb8330660f5d07897519b28c124[m
+Merge: 1675322 fe0e204
+Author: Armando Perez <armandoperez0001@gmail.com>
+Date:   Thu Mar 7 14:07:56 2019 -0800
+
+    Merge branch 'master' of http://rijeka.sdsu.edu/cs596s2019_team04/cs596s19_3d_game_team04
+    
+    Pulling readme from repo.
+
+[33mcommit 1675322f62d52ac6c3bdc62aea386c6f7e58c15b[m
+Author: Armando Perez <armandoperez0001@gmail.com>
+Date:   Thu Mar 7 14:07:10 2019 -0800
+
+    changed scene colors and added a few environment objects
+
+[33mcommit fe0e2044994bbf806558e6dd9d28d2f78bb422cd[m
+Author: Armando Perez <armandoperez0001@gmail.com>
+Date:   Thu Mar 7 13:49:40 2019 -0800
+
+    Update README.md
+
+[33mcommit 50e76592ebef8f6f5a3822758862b33202ca1a7b[m
+Author: Armando Perez <armandoperez0001@gmail.com>
+Date:   Thu Mar 7 13:48:20 2019 -0800
+
+    Update README.md
+
+[33mcommit 0c021d0def205282496ea4d5a6ecf1768bbd045d[m
+Author: Armando Perez <armandoperez0001@gmail.com>
+Date:   Thu Mar 7 13:47:54 2019 -0800
+
+    Update README.md
+
+[33mcommit 9cf3c484ee24fe818265b9af01b51ced19ca122d[m
+Author: Armando Perez <armandoperez0001@gmail.com>
+Date:   Thu Mar 7 13:46:09 2019 -0800
+
+    added Readme file
+
+[33mcommit 5fdfd0cbe9bb7c9def34683a9ce8129381eaa2e5[m
+Author: Armando Perez <armandoperez0001@gmail.com>
+Date:   Thu Mar 7 13:42:48 2019 -0800
+
+    created rough protoype using public free environment asset. Implemented CharacterController and smoothed Camera movement. Will add README.md withh current control configurations

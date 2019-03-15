@@ -1406,15 +1406,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   walkSpeed: 15
   runSpeed: 30
-  jumpHeight: 20
+  jumpHeight: 12
   gravity: -20
-  groundDist: 0.2
+  groundDist: 0.3
   ground:
     serializedVersion: 2
     m_Bits: 1
-  drag: {x: 0, y: 0, z: 0}
-  jumpPressedRememberTime: 0
-  groundedRememberTime: 0
+  drag: {x: 0.5, y: 0.5, z: 0.5}
+  jumpPressedRememberTime: 1
+  groundedRememberTime: 1
 --- !u!114 &439142646
 MonoBehaviour:
   m_ObjectHideFlags: 0
