@@ -99,7 +99,7 @@ public class PlayerMovement : MonoBehaviour
         
        // orientPlayer();
     }
-    
+
     public Vector3 getVelocity()
     {
         return _controller.velocity;

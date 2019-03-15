@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class State
 {
-    public StateMachine Machine;
+    private StateMachine Machine { get; set; }
 
     public State()
     {
