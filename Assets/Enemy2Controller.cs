@@ -14,7 +14,7 @@ public class Enemy2Controller : MonoBehaviour
     NavMeshAgent agent; // Reference to the NavMeshAgent
     GameObject prefab;
     public Transform projectileSpawn;
-    float coolDown = 0f;
+    float coolDown = 1.5f;
 
     public Transform ProjectileSpawn
     {
@@ -39,28 +39,20 @@ public class Enemy2Controller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        coolDown -= Time.deltaTime;
         // Distance to the target
         float distance = Vector3.Distance(target.position, transform.position);
 
         // If inside the lookRadius, face and shoot
         if (distance <= lookRadius)
         {
+            coolDown -= Time.deltaTime;
             Vector3 direction = (target.position - transform.position).normalized;
             Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
             transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
-
             if (coolDown <= 0)
             {
                 ShootTarget();
                 coolDown = 2f;
-            }
-            
-            // If within attacking distance
-            if (distance <= agent.stoppingDistance)
-            {
-                // Move away from the target
-  
             }
         }
     }
