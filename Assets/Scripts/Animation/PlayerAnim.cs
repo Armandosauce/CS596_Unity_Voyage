@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(PlayerMovement))]
+[RequireComponent(typeof(PlayerMotor))]
 [RequireComponent(typeof(PlayerInputController))]
 public class PlayerAnim : MonoBehaviour {
 

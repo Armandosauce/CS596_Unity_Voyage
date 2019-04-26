@@ -95,7 +95,7 @@ public class PlayerMotor : MonoBehaviour
         // Jump function, if player was grounded within last 0.X seconds and pressed jump within last 0.X seconds, add jumpForce
         if((jumpPressedRemember > 0) && (groundedRemember > 0))
         {
-            verticalVelocity += Mathf.Sqrt(jumpForce * -2f * gravity);
+            verticalVelocity = jumpForce;
         }
 
     }
