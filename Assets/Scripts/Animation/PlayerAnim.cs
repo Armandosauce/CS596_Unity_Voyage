@@ -9,13 +9,13 @@ public class PlayerAnim : MonoBehaviour {
     public Animator anim;
 
     private PlayerInputController input;
-    private PlayerMovement player;
+    private PlayerMotor player;
     private float animDefaultSpeed;
     
     private void Start()
     {
         input = GetComponent<PlayerInputController>();
-        player = GetComponent<PlayerMovement>();
+        player = GetComponent<PlayerMotor>();
         animDefaultSpeed = anim.speed;
 
     }
