@@ -50,6 +50,7 @@ public class SkeletonContoller : MonoBehaviour
         else
         {
             anim.SetBool("isIdle", true);
+            anim.SetBool("isRunning", false);
         }
     }
 
