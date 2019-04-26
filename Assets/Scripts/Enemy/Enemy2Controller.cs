@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class EvasiveController : MonoBehaviour { 
+/* Controls the Enemy AI */
+
+public class Enemy2Controller : MonoBehaviour
+{
 
     public float lookRadius = 100f;  // Detection range for player
 
@@ -12,6 +15,7 @@ public class EvasiveController : MonoBehaviour {
     GameObject prefab;
     public Transform projectileSpawn;
     float coolDown = 1.5f;
+    public float projectileSpeed = 2700f;
 
     public Transform ProjectileSpawn
     {
@@ -38,49 +42,29 @@ public class EvasiveController : MonoBehaviour {
     {
         // Distance to the target
         float distance = Vector3.Distance(target.position, transform.position);
-        
+
+        // If inside the lookRadius, face and shoot
         if (distance <= lookRadius)
         {
-            // If within melee distance, run!
-            if (distance <= agent.stoppingDistance)
+            coolDown -= Time.deltaTime;
+            Vector3 direction = (target.position - transform.position).normalized;
+            Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
+            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
+            if (coolDown <= 0)
             {
-                RunAway();
-                coolDown = 1f;
-            }
-            else    //else face and shoot
-            {
-
-                coolDown -= Time.deltaTime;
-                Vector3 direction = (target.position - transform.position).normalized;
-                Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
-                transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
-
-                if (coolDown <= 0)
-                {
-                    ShootTarget();
-                    coolDown = 2f;
-                }
+                ShootTarget();
+                coolDown = 2f;
             }
         }
     }
 
-
-    void RunAway()
-    {
-        Vector3 direction = -((target.position - transform.position).normalized);
-        Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
-        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
-        transform.Translate(0, 0, 0.1f);
-        //set bool is running to true
-    }
-
-    // launch projectile
+    // Rotate to face the target
     void ShootTarget()
     {
         GameObject projectileInstance;
         projectileInstance = Instantiate(prefab, projectileSpawn.position, projectileSpawn.rotation);
         Rigidbody rb = projectileInstance.GetComponent<Rigidbody>();
-        rb.AddForce(projectileSpawn.forward * 2700);
+        rb.AddForce(projectileSpawn.forward * projectileSpeed);
     }
 
     // Show the lookRadius in editor

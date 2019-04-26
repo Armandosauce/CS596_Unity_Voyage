@@ -10,6 +10,8 @@ public class SkeletonContoller : MonoBehaviour
 
     Transform target;   // Reference to the player
     NavMeshAgent agent; // Reference to the NavMeshAgent
+    public float runningSpeed = 18f;
+    public float attackingSpeed = 2f;
 
     // Use this for initialization
     void Start()
@@ -33,15 +35,15 @@ public class SkeletonContoller : MonoBehaviour
             if (distance <= agent.stoppingDistance) // if within attack distance, 
             {                                       //target and attack
                 FaceTarget();
-                agent.speed = 2f;
-                agent.acceleration = 2f;
+                agent.speed = attackingSpeed;
+                agent.acceleration = attackingSpeed;
                 anim.SetBool("isAttacking", true);
                 anim.SetBool("isRunning", false);
             }
             else
             {
-                agent.speed = 18f;
-                agent.acceleration = 18f;                //else chase them
+                agent.speed = runningSpeed;
+                agent.acceleration = runningSpeed;                //else chase them
                 anim.SetBool("isRunning", true);
                 anim.SetBool("isAttacking", false);
                 agent.SetDestination(target.position);
