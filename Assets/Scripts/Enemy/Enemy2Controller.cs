@@ -15,6 +15,7 @@ public class Enemy2Controller : MonoBehaviour
     GameObject prefab;
     public Transform projectileSpawn;
     float coolDown = 1.5f;
+    public float projectileSpeed = 2700f;
 
     public Transform ProjectileSpawn
     {
@@ -63,7 +64,7 @@ public class Enemy2Controller : MonoBehaviour
         GameObject projectileInstance;
         projectileInstance = Instantiate(prefab, projectileSpawn.position, projectileSpawn.rotation);
         Rigidbody rb = projectileInstance.GetComponent<Rigidbody>();
-        rb.AddForce(projectileSpawn.forward * 2000);
+        rb.AddForce(projectileSpawn.forward * projectileSpeed);
     }
 
     // Show the lookRadius in editor

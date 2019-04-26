@@ -11,7 +11,13 @@ public class EvasiveController : MonoBehaviour {
     NavMeshAgent agent; // Reference to the NavMeshAgent
     GameObject prefab;
     public Transform projectileSpawn;
+<<<<<<< HEAD:Assets/Scripts/EvasiveController.cs
     public float coolDown = 1.5f;
+=======
+    float coolDown = 1.5f;
+    public float enemySpeed = 0.1f;
+    public float projectileSpeed = 2700f;
+>>>>>>> c98624f335a75adc6b5fdb1265b5d6b899de10a5:Assets/Scripts/Enemy/EvasiveController.cs
 
     public Transform ProjectileSpawn
     {
@@ -70,7 +76,7 @@ public class EvasiveController : MonoBehaviour {
         Vector3 direction = -((target.position - transform.position).normalized);
         Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
-        transform.Translate(0, 0, 0.1f);
+        transform.Translate(0, 0, enemySpeed);
         //set bool is running to true
     }
 
@@ -80,7 +86,7 @@ public class EvasiveController : MonoBehaviour {
         GameObject projectileInstance;
         projectileInstance = Instantiate(prefab, projectileSpawn.position, projectileSpawn.rotation);
         Rigidbody rb = projectileInstance.GetComponent<Rigidbody>();
-        rb.AddForce(projectileSpawn.forward * 2700);
+        rb.AddForce(projectileSpawn.forward * projectileSpeed);
     }
 
     // Show the lookRadius in editor
