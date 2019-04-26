@@ -37,6 +37,12 @@ public class PlayerMovement : MonoBehaviour
     {
         _isGrounded = Physics.CheckSphere(_groundCheck.position, groundDist, ground, QueryTriggerInteraction.Ignore);
 
+        if (_isGrounded)
+        {
+
+            groundedRemember = groundedRememberTime;
+        }
+
         /*
         #region Jump
         
