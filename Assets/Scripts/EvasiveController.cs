@@ -11,7 +11,7 @@ public class EvasiveController : MonoBehaviour {
     NavMeshAgent agent; // Reference to the NavMeshAgent
     GameObject prefab;
     public Transform projectileSpawn;
-    float coolDown = 1.5f;
+    public float coolDown = 1.5f;
 
     public Transform ProjectileSpawn
     {
