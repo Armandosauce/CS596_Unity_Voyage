@@ -43,8 +43,8 @@ public class PlayerMotor : MonoBehaviour
         handleVertical();
         
         //horizontal movement
-        playerMovement.x = input.Current.MoveInput.x * (moveSpeed / 10);
-        playerMovement.z = input.Current.MoveInput.z * (moveSpeed / 10);
+        playerMovement.x = input.Current.MoveInput.x * moveSpeed * Time.deltaTime;
+        playerMovement.z = input.Current.MoveInput.z * moveSpeed * Time.deltaTime;
 
         //vertical movement
         playerMovement.y = verticalVelocity * Time.deltaTime;

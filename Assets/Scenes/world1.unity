@@ -1574,9 +1574,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jumpPressedRememberTime: 0.2
-  jumpForce: 12
+  jumpForce: 11
   gravity: -14
-  moveSpeed: 5
+  moveSpeed: 25
   fallMultiplier: 3
   fallThreshold: 4
   groundedRememberTime: 0.5
