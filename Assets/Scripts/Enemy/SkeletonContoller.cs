@@ -11,7 +11,9 @@ public class SkeletonContoller : MonoBehaviour
     Transform target;   // Reference to the player
     NavMeshAgent agent; // Reference to the NavMeshAgent
     public float runningSpeed = 18f;
-    public float attackingSpeed = 2f;
+    public float attackingSpeed = 1f;
+    public bool dead;
+    public float timer;
 
     // Use this for initialization
     void Start()
@@ -19,12 +21,18 @@ public class SkeletonContoller : MonoBehaviour
         anim = GetComponent<Animator>();
         target = PlayerManager.instance.player.transform;
         agent = GetComponent<NavMeshAgent>();
+        dead = false;
     }
 
 
     // Update is called once per frame
     void Update()
     {
+        if(dead)
+        {
+            timer -= Time.deltaTime;
+            if (timer <= 0) Destroy(this.gameObject);
+        }
         // Distance to the target
         float distance = Vector3.Distance(target.position, transform.position);
 
@@ -70,6 +78,16 @@ public class SkeletonContoller : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, lookRadius);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.tag == "Projectile")
+        {
+            anim.SetBool("isDead", true);
+            timer = 1.8f;
+            dead = true;
+        }
     }
 }
 
