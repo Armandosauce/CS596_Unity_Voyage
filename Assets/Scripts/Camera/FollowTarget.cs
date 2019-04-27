@@ -33,7 +33,7 @@ public class FollowTarget : MonoBehaviour
                 rotationSpeed, Vector3.up);
 
             yturnAngle =
-                Quaternion.AngleAxis(-mouseInput.Current.MouseInput.y *
+                Quaternion.AngleAxis(mouseInput.Current.MouseInput.y *
                 rotationSpeed, Vector3.right);
         }
 

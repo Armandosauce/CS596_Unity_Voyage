@@ -985,6 +985,14 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: 100006, guid: d3a70bf704114ff47a15d134ad93c9c7, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 100072, guid: d3a70bf704114ff47a15d134ad93c9c7, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: d3a70bf704114ff47a15d134ad93c9c7, type: 3}
       propertyPath: m_Layer
       value: 9
@@ -994,10 +1002,6 @@ PrefabInstance:
       value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 100004, guid: d3a70bf704114ff47a15d134ad93c9c7, type: 3}
-      propertyPath: m_Layer
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 100006, guid: d3a70bf704114ff47a15d134ad93c9c7, type: 3}
       propertyPath: m_Layer
       value: 9
       objectReference: {fileID: 0}
@@ -1134,10 +1138,6 @@ PrefabInstance:
       value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 100070, guid: d3a70bf704114ff47a15d134ad93c9c7, type: 3}
-      propertyPath: m_Layer
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 100072, guid: d3a70bf704114ff47a15d134ad93c9c7, type: 3}
       propertyPath: m_Layer
       value: 9
       objectReference: {fileID: 0}
@@ -1610,10 +1610,10 @@ MonoBehaviour:
   jumpPressedRememberTime: 0.2
   jumpForce: 11
   gravity: -14
-  moveSpeed: 25
+  moveSpeed: 28
   fallMultiplier: 3
   fallThreshold: 4
-  cam: {fileID: 0}
+  cam: {fileID: 1317855258}
   groundedRememberTime: 0.5
   ground:
     serializedVersion: 2
@@ -2451,6 +2451,7 @@ GameObject:
   - component: {fileID: 1317855258}
   - component: {fileID: 1317855257}
   - component: {fileID: 1317855256}
+  - component: {fileID: 1317855262}
   - component: {fileID: 1317855260}
   - component: {fileID: 1317855261}
   m_Layer: 0
@@ -2539,7 +2540,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1317855255}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ee98559510d37644e97cf735016473f0, type: 3}
   m_Name: 
@@ -2560,6 +2561,26 @@ Skybox:
   m_GameObject: {fileID: 1317855255}
   m_Enabled: 1
   m_CustomSkybox: {fileID: 2100000, guid: fc4fb7cf151876f44b204c292efe54d2, type: 3}
+--- !u!114 &1317855262
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1317855255}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af4e7fc4248cd7547bcedd40fdc981af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 755290416}
+  camTransform: {fileID: 1317855259}
+  distance: 22
+  sensitivityX: 4
+  sensitivityY: 1
+  yAngleMin: 5
+  yAngleMax: 75
+  input: {fileID: 755290414}
 --- !u!1 &1415256765
 GameObject:
   m_ObjectHideFlags: 0
