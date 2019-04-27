@@ -6,6 +6,7 @@ public class pickupItem : MonoBehaviour
 {
     public Transform dest;
     public float lookRadius = 10f;
+    float distance;
 
 
     Transform target;   // Reference to the player
@@ -23,7 +24,7 @@ public class pickupItem : MonoBehaviour
     void Update()
     {
         // Distance to the target
-        float distance = Vector3.Distance(target.position, transform.position);
+        distance = Vector3.Distance(target.position, transform.position);
 
         // If inside the lookRadius
         if (distance <= lookRadius)
@@ -73,4 +74,13 @@ public class pickupItem : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, lookRadius);
     }
+
+    private void OnGUI()
+    {
+        if (distance <= lookRadius && onGround)
+        {
+            GUI.Label(new Rect(0,0, Screen.width, Screen.height), "'E' to pickup");
+        }
+    }
+    
 }
