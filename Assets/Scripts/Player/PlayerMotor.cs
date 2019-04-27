@@ -12,10 +12,12 @@ public class PlayerMotor : MonoBehaviour
     public float moveSpeed;
     public float fallMultiplier;
     public float fallThreshold;
+    public Camera cam;
     private CharacterController _controller;
     private float verticalVelocity;
     private PlayerInputController input;
     private Vector3 playerMovement;
+    private Vector3 direction;
 
     public float groundedRememberTime;
     public LayerMask ground;
@@ -24,6 +26,8 @@ public class PlayerMotor : MonoBehaviour
     private bool _isGrounded;
     private float jumpPressedRemember;
     private float groundedRemember;
+    RaycastHit hit;
+    Ray down; 
 
     // Start is called before the first frame update
     void Start()
@@ -32,6 +36,7 @@ public class PlayerMotor : MonoBehaviour
         input = GetComponent<PlayerInputController>();
         _groundCheck = transform.GetChild(0);
         playerMovement = Vector3.zero;
+        direction = Vector3.zero;
         verticalVelocity = 0;
         groundedRemember = 0;
         jumpPressedRemember = 0;
@@ -41,22 +46,52 @@ public class PlayerMotor : MonoBehaviour
     void Update()
     {
         handleVertical();
-        
-        //horizontal movement
-        playerMovement.x = input.Current.MoveInput.x * moveSpeed * Time.deltaTime;
-        playerMovement.z = input.Current.MoveInput.z * moveSpeed * Time.deltaTime;
 
+        down = new Ray(transform.position, Vector3.down);
+        if (input.Current.MoveInput != Vector3.zero && Physics.Raycast(down, out hit))
+        {
+            transform.forward = Vector3.ProjectOnPlane(cam.transform.forward, hit.normal);
+        }
+
+        handleHorizontal();
+        playerMovement *= moveSpeed * Time.deltaTime;
         //vertical movement
         playerMovement.y = verticalVelocity * Time.deltaTime;
 
         _controller.Move(playerMovement);
 
-        Debug.Log(_isGrounded + ", " + playerMovement + "," + verticalVelocity);
-
-        if (input.Current.MoveInput != Vector3.zero)
-            transform.forward = input.Current.MoveInput;
+        //Debug.Log(_isGrounded + ", " + playerMovement + "," + verticalVelocity);
     }
-    
+
+
+    private void handleHorizontal()
+    {
+        //horizontal movement
+
+        if (input.Current.MoveInput.x > 0)
+        {
+            playerMovement.x = cam.transform.right.x;
+            playerMovement.z = cam.transform.right.z;
+        }
+        else if (input.Current.MoveInput.x < 0)
+        {
+            playerMovement.x = -cam.transform.right.x;
+            playerMovement.z = -cam.transform.right.z;
+        }
+
+
+        if (input.Current.MoveInput.z > 0)
+        {
+            playerMovement.x = cam.transform.forward.x;
+            playerMovement.z = cam.transform.forward.z;
+        }
+        else if (input.Current.MoveInput.z < 0)
+        {
+            playerMovement.x = -cam.transform.forward.x;
+            playerMovement.z = -cam.transform.forward.z;
+        }
+        
+    }
 
     private void handleVertical()
     {

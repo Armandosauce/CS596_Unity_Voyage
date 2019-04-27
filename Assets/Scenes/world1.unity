@@ -612,6 +612,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lookRadius: 30
   projectileSpawn: {fileID: 1415256766}
+  projectileSpeed: 2700
 --- !u!54 &341565171
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -837,6 +838,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lookRadius: 100
   projectileSpawn: {fileID: 1472044522}
+  coolDown: 1.5
+  enemySpeed: 0.3
+  projectileSpeed: 2700
 --- !u!54 &551674033
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1576,9 +1580,10 @@ MonoBehaviour:
   jumpPressedRememberTime: 0.2
   jumpForce: 11
   gravity: -14
-  moveSpeed: 25
+  moveSpeed: 28
   fallMultiplier: 3
   fallThreshold: 4
+  cam: {fileID: 1317855258}
   groundedRememberTime: 0.5
   ground:
     serializedVersion: 2
@@ -1641,6 +1646,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lookRadius: 30
+  runningSpeed: 18
+  attackingSpeed: 2
 --- !u!1001 &831951155
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2380,7 +2387,106 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d315403113c6fd4982b5a4f91f0a12e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Name: 
+  m_EditorClassIdentifier: 
   planetRadius: 0
+  xSize: 0
+  ySize: 0
+  zSize: 0
 --- !u!4 &1272815170 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: fe3a8415828f75743a6e9f08c93d76db,
@@ -2401,6 +2507,7 @@ GameObject:
   - component: {fileID: 1317855256}
   - component: {fileID: 1317855260}
   - component: {fileID: 1317855261}
+  - component: {fileID: 1317855262}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -2473,7 +2580,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1317855255}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 4, z: -8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -2493,8 +2600,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 755290416}
-  smoothing: 4
-  offset: {x: 0, y: 6, z: -12}
+  smoothing: 0.5
+  offset: {x: 0, y: 12, z: -16}
+  rotationSpeed: 5
+  mouseInput: {fileID: 755290414}
+  lookAtPlayer: 0
+  rotateAroundPlayer: 1
 --- !u!45 &1317855261
 Skybox:
   m_ObjectHideFlags: 0
@@ -2504,6 +2615,19 @@ Skybox:
   m_GameObject: {fileID: 1317855255}
   m_Enabled: 1
   m_CustomSkybox: {fileID: 2100000, guid: fc4fb7cf151876f44b204c292efe54d2, type: 3}
+--- !u!135 &1317855262
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1317855255}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1415256765
 GameObject:
   m_ObjectHideFlags: 0
