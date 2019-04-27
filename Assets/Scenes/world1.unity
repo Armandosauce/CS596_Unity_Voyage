@@ -2545,7 +2545,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 755290416}
-  smoothing: 4
+  smoothing: 3
   offset: {x: 0, y: 6, z: -12}
   rotationSpeed: 5
   mouseInput: {fileID: 755290414}
