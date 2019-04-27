@@ -612,6 +612,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lookRadius: 30
   projectileSpawn: {fileID: 1415256766}
+  projectileSpeed: 2700
 --- !u!54 &341565171
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -837,6 +838,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lookRadius: 100
   projectileSpawn: {fileID: 1472044522}
+  coolDown: 1.5
+  enemySpeed: 0.1
+  projectileSpeed: 2700
 --- !u!54 &551674033
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -867,7 +871,7 @@ NavMeshAgent:
   m_Acceleration: 20
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 13
+  m_StoppingDistance: 19
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -1615,7 +1619,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 760538932}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.05
+  m_Radius: 0.14
   m_Speed: 18
   m_Acceleration: 18
   avoidancePriority: 50
@@ -1641,6 +1645,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lookRadius: 30
+  runningSpeed: 18
+  attackingSpeed: 2
 --- !u!1001 &831951155
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2380,7 +2386,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d315403113c6fd4982b5a4f91f0a12e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  planetRadius: 0
 --- !u!4 &1272815170 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: fe3a8415828f75743a6e9f08c93d76db,
