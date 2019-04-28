@@ -203,7 +203,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   image: {fileID: 2800000, guid: 34c215dfcb5a0244e99d5d0712ced4d2, type: 3}
-  yOffsetPercentage: 0.55
+  yOffsetPercentage: 0.1
   imageAlpha: 0
 --- !u!1 &142656662
 GameObject:
@@ -2644,12 +2644,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 755290416}
   camTransform: {fileID: 1317855259}
-  camOffset: {x: 3, y: 12, z: -12}
+  camOffset: {x: 3, y: 4, z: -10}
   sensitivityX: 4
   sensitivityY: 1
-  yAngleMin: -50
-  yAngleMax: 20
-  targetOffset: {x: 3, y: 3, z: 0}
+  yAngleMin: -20
+  yAngleMax: 50
+  targetOffset: {x: 3, y: 7, z: 0}
   input: {fileID: 755290414}
 --- !u!1 &1415256765
 GameObject:
