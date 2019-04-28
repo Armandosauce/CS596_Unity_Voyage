@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 /* Controls the Enemy AI */
 
-public class Enemy2Controller : MonoBehaviour
+public class ProjectileController : MonoBehaviour
 {
 
     public float lookRadius = 100f;  // Detection range for player
