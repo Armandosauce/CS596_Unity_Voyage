@@ -20,7 +20,6 @@ public class PlayerMotor : MonoBehaviour
     private Vector3 playerMovement;
     private Vector3 direction;
     
-
     public float groundedRememberTime;
     public LayerMask ground;
     public float groundDist;
@@ -28,6 +27,7 @@ public class PlayerMotor : MonoBehaviour
     private bool _isGrounded;
     private float jumpPressedRemember;
     private float groundedRemember;
+    private float groundIndex;
     RaycastHit hit;
     Ray down;
 
@@ -42,6 +42,7 @@ public class PlayerMotor : MonoBehaviour
         verticalVelocity = 0;
         groundedRemember = 0;
         jumpPressedRemember = 0;
+        groundIndex = Mathf.Log(ground.value, 2);
     }
 
     // Update is called once per frame
@@ -52,8 +53,16 @@ public class PlayerMotor : MonoBehaviour
         down = new Ray(transform.position, Vector3.down);
         if (input.Current.MoveInput != Vector3.zero && Physics.Raycast(down, out hit))
         {
-            transform.forward = Vector3.ProjectOnPlane(cam.transform.forward, hit.normal);
-            transform.rotation *= Quaternion.Euler(rotationOffset);
+            // This if checks if there is something between the ground and the player, 
+            // if there is not, then the player will rotate normal to the surface
+            Debug.Log("Ground index: " + groundIndex + ", collider index:  " + hit.collider.gameObject.layer);
+
+            if (hit.collider.gameObject.layer == groundIndex)
+            {
+                transform.forward = Vector3.ProjectOnPlane(cam.transform.forward, hit.normal);
+                transform.rotation *= Quaternion.Euler(rotationOffset);
+            }
+
         }
 
         handleHorizontal();
