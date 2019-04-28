@@ -1042,7 +1042,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4248c18a493735d49bc67aab154b5c3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lookRadius: 80
+  lookRadius: 110
   projectileSpawn: {fileID: 1472044522}
   coolDown: 1.5
   enemySpeed: 0.1
@@ -1078,7 +1078,7 @@ NavMeshAgent:
   m_Acceleration: 20
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 6
+  m_StoppingDistance: 14
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1

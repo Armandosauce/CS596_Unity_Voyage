@@ -52,6 +52,8 @@ public class pickupItem : MonoBehaviour
     }
 
     /*
+     * Enable for mouse click-hold to pickup
+     * 
     private void OnMouseDown()
     {
         GetComponent<BoxCollider>().enabled = false;
@@ -80,6 +82,10 @@ public class pickupItem : MonoBehaviour
         if (distance <= lookRadius && onGround)
         {
             GUI.Label(new Rect(0,0, Screen.width, Screen.height), "'E' to pickup");
+        }
+        if (distance <= lookRadius && !onGround)
+        {
+            GUI.Label(new Rect(0, 0, Screen.width, Screen.height), "'E' to drop");
         }
     }
     
