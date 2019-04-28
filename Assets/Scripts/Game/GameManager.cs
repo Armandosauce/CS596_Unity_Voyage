@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour {
         {
             Destroy(this.gameObject);
         }
-        
+        Cursor.visible = false;
     }
     
 }
