@@ -8,7 +8,7 @@ public class ThirdPersonCamera : MonoBehaviour
     public Transform camTransform;
     
     [SerializeField]
-    private float distance;
+    private Vector3 camOffset;
     [SerializeField]
     private float sensitivityX;
     [SerializeField]
@@ -17,6 +17,8 @@ public class ThirdPersonCamera : MonoBehaviour
     private float yAngleMin;
     [SerializeField]
     private float yAngleMax;
+    [SerializeField]
+    private Vector3 targetOffset;
     [SerializeField]
     private PlayerInputController input;
 
@@ -43,12 +45,12 @@ public class ThirdPersonCamera : MonoBehaviour
     // Update is called once per frame
     void LateUpdate()
     {
-        direction = new Vector3(0, 0, -distance);
+        direction = camOffset;
 
         Quaternion rotation = Quaternion.Euler(currentY, currentX, 0);
         camTransform.position = target.position + rotation * direction;
 
-        camTransform.LookAt(target.position);
+        camTransform.LookAt(target.position + targetOffset);
         
     }
 }

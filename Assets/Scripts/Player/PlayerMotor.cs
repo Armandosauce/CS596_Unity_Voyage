@@ -13,11 +13,13 @@ public class PlayerMotor : MonoBehaviour
     public float fallMultiplier;
     public float fallThreshold;
     public Camera cam;
+    public Vector3 rotationOffset;
     private CharacterController _controller;
     private float verticalVelocity;
     private PlayerInputController input;
     private Vector3 playerMovement;
     private Vector3 direction;
+    
 
     public float groundedRememberTime;
     public LayerMask ground;
@@ -51,6 +53,7 @@ public class PlayerMotor : MonoBehaviour
         if (input.Current.MoveInput != Vector3.zero && Physics.Raycast(down, out hit))
         {
             transform.forward = Vector3.ProjectOnPlane(cam.transform.forward, hit.normal);
+            transform.rotation *= Quaternion.Euler(rotationOffset);
         }
 
         handleHorizontal();
