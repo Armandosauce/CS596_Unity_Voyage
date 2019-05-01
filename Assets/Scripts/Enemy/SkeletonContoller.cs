@@ -28,39 +28,51 @@ public class SkeletonContoller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(dead)
+        if (dead)
         {
             timer -= Time.deltaTime;
             if (timer <= 0) Destroy(this.gameObject);
         }
-        // Distance to the target
-        float distance = Vector3.Distance(target.position, transform.position);
-
-        // If inside the lookRadius
-        if (distance <= lookRadius)
+        else
         {
-            anim.SetBool("isIdle", false);
-            if (distance <= agent.stoppingDistance) // if within attack distance, 
-            {                                       //target and attack
-                FaceTarget();
-                agent.speed = attackingSpeed;
-                agent.acceleration = attackingSpeed;
-                anim.SetBool("isAttacking", true);
-                anim.SetBool("isRunning", false);
+            // Distance to the target
+            float distance = Vector3.Distance(target.position, transform.position);
+
+            // If inside the lookRadius
+            if (distance <= lookRadius)
+            {
+                anim.SetBool("isIdle", false);
+                if (distance <= agent.stoppingDistance) // if within attack distance, 
+                {                                       //target and attack
+                    FaceTarget();
+                    agent.speed = attackingSpeed;
+                    agent.acceleration = attackingSpeed;
+                    anim.SetBool("isAttacking", true);
+                    anim.SetBool("isRunning", false);
+                }
+                else
+                {
+                    agent.speed = runningSpeed;
+                    agent.acceleration = runningSpeed;                //else chase them
+
+                    anim.SetBool("isRunning", true);
+
+                    anim.SetBool("isAttacking", false);
+
+                    agent.SetDestination(target.position);
+                }
             }
             else
             {
-                agent.speed = runningSpeed;
-                agent.acceleration = runningSpeed;                //else chase them
-                anim.SetBool("isRunning", true);
-                anim.SetBool("isAttacking", false);
-                agent.SetDestination(target.position);
+                anim.SetBool("isIdle", true);
+                anim.SetBool("isRunning", false);
+                agent.SetDestination(this.transform.position);
             }
-        }
-        else
-        {
-            anim.SetBool("isIdle", true);
-            anim.SetBool("isRunning", false);
+
+            if (anim.GetCurrentAnimatorStateInfo(0).IsName("Skill"))
+            {
+                agent.SetDestination(this.transform.position);
+            }
         }
     }
 
