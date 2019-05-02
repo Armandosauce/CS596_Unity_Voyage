@@ -1162,6 +1162,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 100160, guid: d3a70bf704114ff47a15d134ad93c9c7, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 100006, guid: d3a70bf704114ff47a15d134ad93c9c7, type: 3}
       propertyPath: m_Layer
       value: 10
@@ -1684,6 +1688,19 @@ CharacterController:
   m_SkinWidth: 0.001
   m_MinMoveDistance: 0
   m_Center: {x: 0, y: 5.5, z: 0}
+--- !u!114 &755290413
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 755290411}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 701fe460d1b543b4b81cda151296abc3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 100
 --- !u!114 &755290414
 MonoBehaviour:
   m_ObjectHideFlags: 0
