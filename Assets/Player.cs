@@ -6,7 +6,7 @@ public class Player : MonoBehaviour
 {
     public float health;
 
-    private float currentHealth;
+    public float currentHealth;
 
     // Start is called before the first frame update
     void Start()
