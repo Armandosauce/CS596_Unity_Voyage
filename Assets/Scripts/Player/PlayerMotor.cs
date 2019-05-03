@@ -55,7 +55,7 @@ public class PlayerMotor : MonoBehaviour
         {
             // This if checks if there is something between the ground and the player, 
             // if there is not, then the player will rotate normal to the surface
-            Debug.Log("Ground index: " + groundIndex + ", collider index:  " + hit.collider.gameObject.layer);
+            //Debug.Log("Ground index: " + groundIndex + ", collider index:  " + hit.collider.gameObject.layer);
 
             if (hit.collider.gameObject.layer == groundIndex)
             {

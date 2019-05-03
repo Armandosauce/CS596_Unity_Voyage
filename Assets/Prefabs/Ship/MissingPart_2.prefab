@@ -75,17 +75,22 @@ PrefabInstance:
     - target: {fileID: 3947965628866573739, guid: 194c76db1ff164cf18dc2efd61a37038,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.90926033
+      value: 0.30197445
       objectReference: {fileID: 0}
     - target: {fileID: 3947965628866573739, guid: 194c76db1ff164cf18dc2efd61a37038,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 1.7576
+      value: 1.0730499
       objectReference: {fileID: 0}
+    - target: {fileID: 3947965628866573738, guid: 194c76db1ff164cf18dc2efd61a37038,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
     - target: {fileID: 3947965628866573741, guid: 194c76db1ff164cf18dc2efd61a37038,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 3851f3fd1df0ad746881fbf9bc60820e, type: 3}
+      objectReference: {fileID: 2100016, guid: d3a70bf704114ff47a15d134ad93c9c7, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 194c76db1ff164cf18dc2efd61a37038, type: 3}

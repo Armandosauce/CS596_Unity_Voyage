@@ -7,6 +7,7 @@ public class ShipController : MonoBehaviour
     public int missingParts;
     public bool isComplete;
     public GameObject[] missingPartsArray;
+    public GameObject[] shipComponentsArray;
     public Transform[] spawnPoints;
     private List<GameObject> activeParts = new List<GameObject>();
 
@@ -36,11 +37,23 @@ public class ShipController : MonoBehaviour
         {
             missingParts = 0;
 
-            foreach (GameObject part in activeParts)
+            //foreach (GameObject part in activeParts)
+            //{
+            //    if (part.GetComponent<ShipPartsController>().collected == false)
+            //    {
+            //        missingParts++;
+            //    }
+            //}
+
+            for (int i = 0; i < activeParts.Count; i++)
             {
-                if (part.GetComponent<ShipPartsController>().collected == false)
+                if (activeParts[i].GetComponent<ShipPartsController>().collected == false)
                 {
                     missingParts++;
+                }
+                else
+                {
+                    shipComponentsArray[i].SetActive(true);
                 }
             }
 

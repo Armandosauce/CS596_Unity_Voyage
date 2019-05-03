@@ -8,18 +8,19 @@ public class SkeletonContoller : MonoBehaviour
     Animator anim;
     public float lookRadius = 30f;  // Detection range for player
 
-    Transform target;   // Reference to the player
+    public Player target;   // Reference to the player
     NavMeshAgent agent; // Reference to the NavMeshAgent
     public float runningSpeed = 18f;
     public float attackingSpeed = 1f;
-    public bool dead;
+    public float atkDamage;
     public float timer;
+    private float dist;
+    private bool dead;
 
     // Use this for initialization
     void Start()
     {
         anim = GetComponent<Animator>();
-        target = PlayerManager.instance.player.transform;
         agent = GetComponent<NavMeshAgent>();
         dead = false;
     }
@@ -28,39 +29,50 @@ public class SkeletonContoller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(dead)
+        if (dead)
         {
             timer -= Time.deltaTime;
             if (timer <= 0) Destroy(this.gameObject);
         }
-        // Distance to the target
-        float distance = Vector3.Distance(target.position, transform.position);
-
-        // If inside the lookRadius
-        if (distance <= lookRadius)
+        else
         {
-            anim.SetBool("isIdle", false);
-            if (distance <= agent.stoppingDistance) // if within attack distance, 
-            {                                       //target and attack
-                FaceTarget();
-                agent.speed = attackingSpeed;
-                agent.acceleration = attackingSpeed;
-                anim.SetBool("isAttacking", true);
-                anim.SetBool("isRunning", false);
+            // Distance to the target
+            dist = Vector3.Distance(target.transform.position, this.transform.position);
+
+            // If inside the lookRadius
+            if (dist <= lookRadius)
+            {
+                anim.SetBool("isIdle", false);
+                if (dist <= agent.stoppingDistance) // if within attack distance, 
+                {                                       //target and attack
+                    FaceTarget();
+                    agent.speed = attackingSpeed;
+                    agent.SetDestination(this.transform.position);
+                    anim.SetBool("isAttacking", true);
+                    anim.SetBool("isRunning", false);
+                }
+                else
+                {
+                    agent.speed = runningSpeed;
+                    agent.acceleration = runningSpeed;                //else chase them
+
+                    anim.SetBool("isRunning", true);
+                    anim.SetBool("isAttacking", false);
+
+                    agent.SetDestination(target.transform.position);
+                }
             }
             else
             {
-                agent.speed = runningSpeed;
-                agent.acceleration = runningSpeed;                //else chase them
-                anim.SetBool("isRunning", true);
-                anim.SetBool("isAttacking", false);
-                agent.SetDestination(target.position);
+                anim.SetBool("isIdle", true);
+                anim.SetBool("isRunning", false);
+                agent.SetDestination(this.transform.position);
             }
-        }
-        else
-        {
-            anim.SetBool("isIdle", true);
-            anim.SetBool("isRunning", false);
+
+            if (anim.GetCurrentAnimatorStateInfo(0).IsName("Skill"))
+            {
+                agent.SetDestination(this.transform.position);
+            }
         }
     }
 
@@ -68,7 +80,7 @@ public class SkeletonContoller : MonoBehaviour
     // Rotate to face the target
     void FaceTarget()
     {
-        Vector3 direction = (target.position - transform.position).normalized;
+        Vector3 direction = (target.transform.position - transform.position).normalized;
         Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
     }
@@ -82,12 +94,27 @@ public class SkeletonContoller : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.tag == "Projectile")
+        if(collision.gameObject.tag == "EnemyProjectile")
         {
             anim.SetBool("isDead", true);
             timer = 1.8f;
             dead = true;
         }
+        
+        if(collision.gameObject.tag == "Player")
+        {
+            target.takeDamage(atkDamage);
+        }
+    }
+
+    private void beginHitbox()
+    {
+
+    }
+
+    private void endHitbox()
+    {
+
     }
 }
 

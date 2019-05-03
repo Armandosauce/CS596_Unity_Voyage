@@ -6,8 +6,14 @@ public class pickupItem : MonoBehaviour
 {
     public Transform dest;
     public float lookRadius = 10f;
-    float distance;
 
+    [SerializeField]
+    private Rigidbody rb;
+    [SerializeField]
+    private Collider col;
+    [SerializeField]
+    private Transform itemPosition;
+    float distance;
 
     Transform target;   // Reference to the player
     bool onGround; // 
@@ -17,7 +23,7 @@ public class pickupItem : MonoBehaviour
     {
         target = PlayerManager.instance.player.transform;
         onGround = true;
-           
+
     }
 
     // Update is called once per frame
@@ -33,17 +39,18 @@ public class pickupItem : MonoBehaviour
             {
                 if (onGround)
                 {
-                    GetComponent<BoxCollider>().enabled = false;
-                    GetComponent<Rigidbody>().useGravity = false;
+                    col.enabled = false;
+                    rb.freezeRotation = true;
+                    rb.useGravity = false;
                     this.transform.position = dest.position;
-                    this.transform.parent = GameObject.Find("ItemPosition").transform;
+                    this.transform.parent = itemPosition.transform;
                     onGround = false;
                 }
                 else
                 {
                     this.transform.parent = null;
-                    GetComponent<Rigidbody>().useGravity = true;
-                    GetComponent<BoxCollider>().enabled = true;
+                    rb.useGravity = true;
+                    col.enabled = true;
                     onGround = true;
                 }
             }
@@ -81,12 +88,12 @@ public class pickupItem : MonoBehaviour
     {
         if (distance <= lookRadius && onGround)
         {
-            GUI.Label(new Rect(0,0, Screen.width, Screen.height), "'E' to pickup");
+            GUI.Label(new Rect(0, 0, Screen.width, Screen.height), "'E' to pickup");
         }
         if (distance <= lookRadius && !onGround)
         {
             GUI.Label(new Rect(0, 0, Screen.width, Screen.height), "'E' to drop");
         }
     }
-    
+
 }
