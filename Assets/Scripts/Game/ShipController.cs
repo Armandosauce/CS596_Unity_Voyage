@@ -11,6 +11,8 @@ public class ShipController : MonoBehaviour
     public Transform[] spawnPoints;
     private List<GameObject> activeParts = new List<GameObject>();
 
+    public GameObject shipCompletionBar;
+
     private void Awake()
     {
         isComplete = false;
@@ -36,14 +38,7 @@ public class ShipController : MonoBehaviour
         if (collision.gameObject.name == "PlayerCharacter")
         {
             missingParts = 0;
-
-            //foreach (GameObject part in activeParts)
-            //{
-            //    if (part.GetComponent<ShipPartsController>().collected == false)
-            //    {
-            //        missingParts++;
-            //    }
-            //}
+            int deliveredParts = 0;
 
             for (int i = 0; i < activeParts.Count; i++)
             {
@@ -54,8 +49,11 @@ public class ShipController : MonoBehaviour
                 else
                 {
                     shipComponentsArray[i].SetActive(true);
+                    deliveredParts++;
                 }
             }
+
+            SetCompletionBar(deliveredParts);
 
             if (missingParts == 0)
             {
@@ -81,6 +79,22 @@ public class ShipController : MonoBehaviour
             GameObject prefab = Instantiate(part, activeSpawnPoints[pos]);
             activeParts.Add(prefab);
             activeSpawnPoints.RemoveAt(pos);
+        }
+    }
+
+    public void SetCompletionBar(int deliveredItems)
+    {
+        switch(deliveredItems)
+        {
+            case 1:
+                shipCompletionBar.transform.GetChild(1).gameObject.SetActive(true);
+                break;
+            case 2:
+                shipCompletionBar.transform.GetChild(2).gameObject.SetActive(true);
+                break;
+            case 3:
+                shipCompletionBar.transform.GetChild(3).gameObject.SetActive(true);
+                break;
         }
     }
 }
