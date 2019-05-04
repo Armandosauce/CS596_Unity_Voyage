@@ -12,10 +12,11 @@ public class SkeletonContoller : MonoBehaviour
     NavMeshAgent agent; // Reference to the NavMeshAgent
     public float runningSpeed = 18f;
     public float attackingSpeed = 1f;
-    public float atkDamage;
+    public float atkDamage = 15f;
     public float timer;
     private float dist;
     private bool dead;
+  
 
     // Use this for initialization
     void Start()
@@ -73,8 +74,10 @@ public class SkeletonContoller : MonoBehaviour
             {
                 agent.SetDestination(this.transform.position);
             }
+            
         }
     }
+    
 
 
     // Rotate to face the target
@@ -100,29 +103,27 @@ public class SkeletonContoller : MonoBehaviour
             timer = 1.8f;
             dead = true;
         }
-        
-        if(collision.gameObject.tag == "Player")
-        {
-            target.takeDamage(atkDamage);
-        }
+     
     }
+
+    /*
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.tag == "Player")
+        if(other.gameObject.tag == "Player" && anim.GetBool("isAttacking"))
         {
             target.takeDamage(atkDamage);
         }
     }
+    */
 
-    private void beginHitbox()
+//Event triggered by the Animation "Attack" for the skeleton.
+    private void EndAttack()
     {
-
-    }
-
-    private void endHitbox()
-    {
-
+        if(dist <= agent.stoppingDistance)
+        {
+            target.takeDamage(atkDamage);
+        }
     }
 }
 
