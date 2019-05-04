@@ -107,6 +107,14 @@ public class SkeletonContoller : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.tag == "Player")
+        {
+            target.takeDamage(atkDamage);
+        }
+    }
+
     private void beginHitbox()
     {
 
