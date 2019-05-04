@@ -10,14 +10,19 @@ public class ShipController : MonoBehaviour
     public GameObject[] shipComponentsArray;
     public Transform[] spawnPoints;
     private List<GameObject> activeParts = new List<GameObject>();
+    private int completionCount;
+    AudioSource audioSource;
+    public AudioClip itemDeliveredSound;
 
     public GameObject shipCompletionBar;
 
     private void Awake()
     {
         isComplete = false;
+        completionCount = 0;
         missingParts = missingPartsArray.Length;
         SpawnShipParts();
+        audioSource = GameObject.Find("AudioSource").GetComponent<AudioSource>();
     }
 
     // Start is called before the first frame update
@@ -54,6 +59,11 @@ public class ShipController : MonoBehaviour
             }
 
             SetCompletionBar(deliveredParts);
+            if (completionCount != deliveredParts)
+            {
+                audioSource.PlayOneShot(itemDeliveredSound, 1f);
+                completionCount = deliveredParts;
+            }
 
             if (missingParts == 0)
             {
@@ -63,6 +73,7 @@ public class ShipController : MonoBehaviour
             else
             {
                 Debug.Log("Number of parts missing: " + missingParts);
+                completionCount = deliveredParts;
             }
         }
     }

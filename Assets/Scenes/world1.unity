@@ -1065,6 +1065,7 @@ MonoBehaviour:
   - {fileID: 1186478878}
   - {fileID: 852187923}
   - {fileID: 340532830}
+  itemDeliveredSound: {fileID: 8300000, guid: 485e58ca9cbe449cbbfe703bccd4bfd5, type: 3}
   shipCompletionBar: {fileID: 1462395187}
 --- !u!54 &310890424
 Rigidbody:
