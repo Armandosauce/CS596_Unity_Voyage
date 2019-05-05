@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour {
 
     public static GameManager manager;
+    public Text objectiveText;
     /*
     public KeyCode jump { get; set; }
     public KeyCode forward { get; set; }
@@ -19,6 +21,7 @@ public class GameManager : MonoBehaviour {
         {
             DontDestroyOnLoad(this.gameObject);
             manager = this;
+            Invoke("DisableObjectiveText", 4f);
         }
         else
         {
@@ -26,5 +29,10 @@ public class GameManager : MonoBehaviour {
         }
         Cursor.visible = false;
     }
-    
+
+    void DisableObjectiveText()
+    {
+        objectiveText.enabled = false;
+    }
+
 }
