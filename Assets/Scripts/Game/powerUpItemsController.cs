@@ -8,12 +8,18 @@ public class powerUpItemsController : MonoBehaviour
     public AudioClip itemCollectedSound;
     GameObject player;
     public int healthPickup;
+    public float spinSpeed = 100f;
 
     // Start is called before the first frame update
     void Start()
     {
         audioSource = GameObject.Find("AudioSource").GetComponent<AudioSource>();
         player = GameObject.Find("PlayerCharacter");
+    }
+
+    void Update()
+    {
+        transform.Rotate(new Vector3(0,0,1), spinSpeed * Time.deltaTime);
     }
 
     private void OnCollisionEnter(Collision collision)
