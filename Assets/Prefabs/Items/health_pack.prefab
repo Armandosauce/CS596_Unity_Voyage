@@ -121,4 +121,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7afae3ee67a644bf28bbb31be3393086, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemCollectedSound: {fileID: 8300000, guid: 537eddc64ac97418db0b7ea3934f3c23, type: 3}
+  itemCollectedSound: {fileID: 8300000, guid: 9f135c0da5dcc46779fbd758ca423440, type: 3}
+  healthPickup: 0
