@@ -10,12 +10,19 @@ public class ShipController : MonoBehaviour
     public GameObject[] shipComponentsArray;
     public Transform[] spawnPoints;
     private List<GameObject> activeParts = new List<GameObject>();
+    private int completionCount;
+    AudioSource audioSource;
+    public AudioClip itemDeliveredSound;
+
+    public GameObject shipCompletionBar;
 
     private void Awake()
     {
         isComplete = false;
+        completionCount = 0;
         missingParts = missingPartsArray.Length;
         SpawnShipParts();
+        audioSource = GameObject.Find("AudioSource").GetComponent<AudioSource>();
     }
 
     // Start is called before the first frame update
@@ -36,14 +43,7 @@ public class ShipController : MonoBehaviour
         if (collision.gameObject.name == "PlayerCharacter")
         {
             missingParts = 0;
-
-            //foreach (GameObject part in activeParts)
-            //{
-            //    if (part.GetComponent<ShipPartsController>().collected == false)
-            //    {
-            //        missingParts++;
-            //    }
-            //}
+            int deliveredParts = 0;
 
             for (int i = 0; i < activeParts.Count; i++)
             {
@@ -54,7 +54,15 @@ public class ShipController : MonoBehaviour
                 else
                 {
                     shipComponentsArray[i].SetActive(true);
+                    deliveredParts++;
                 }
+            }
+
+            SetCompletionBar(deliveredParts);
+            if (completionCount != deliveredParts)
+            {
+                audioSource.PlayOneShot(itemDeliveredSound, 1f);
+                completionCount = deliveredParts;
             }
 
             if (missingParts == 0)
@@ -65,6 +73,7 @@ public class ShipController : MonoBehaviour
             else
             {
                 Debug.Log("Number of parts missing: " + missingParts);
+                completionCount = deliveredParts;
             }
         }
     }
@@ -81,6 +90,22 @@ public class ShipController : MonoBehaviour
             GameObject prefab = Instantiate(part, activeSpawnPoints[pos]);
             activeParts.Add(prefab);
             activeSpawnPoints.RemoveAt(pos);
+        }
+    }
+
+    public void SetCompletionBar(int deliveredItems)
+    {
+        switch(deliveredItems)
+        {
+            case 1:
+                shipCompletionBar.transform.GetChild(1).gameObject.SetActive(true);
+                break;
+            case 2:
+                shipCompletionBar.transform.GetChild(2).gameObject.SetActive(true);
+                break;
+            case 3:
+                shipCompletionBar.transform.GetChild(3).gameObject.SetActive(true);
+                break;
         }
     }
 }

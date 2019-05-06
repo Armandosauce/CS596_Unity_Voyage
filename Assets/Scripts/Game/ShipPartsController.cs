@@ -6,10 +6,13 @@ public class ShipPartsController : MonoBehaviour
 {
     public bool collected = false;
 
+    AudioSource audioSource;
+    public AudioClip itemCollectedSound;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        audioSource = GameObject.Find("AudioSource").GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -22,6 +25,8 @@ public class ShipPartsController : MonoBehaviour
     {
         if(collision.gameObject.name == "PlayerCharacter")
         {
+            audioSource.PlayOneShot(itemCollectedSound, 1f);
+
             collected = true;
             transform.gameObject.SetActive(false);
             Debug.Log("Missing part collected.");
