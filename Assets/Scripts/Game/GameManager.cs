@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             Debug.Log("Exit command received.");
-            GetComponent<MenuController>().QuitApp();
+            QuitApp();
         }
     }
 
@@ -43,6 +43,17 @@ public class GameManager : MonoBehaviour
     void DisableObjectiveText()
     {
         objectiveText.enabled = false;
+    }
+
+    public void QuitApp()
+    {
+
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
+
     }
 
 }
