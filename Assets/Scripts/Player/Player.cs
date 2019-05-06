@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -17,7 +18,15 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(currentHealth);   
+        Debug.Log(currentHealth);
+
+        if(currentHealth <= 0)
+        {
+            GameObject gameManager = GameObject.Find("GameManager");
+            gameManager.GetComponent<CrossHair>().enabled = false;
+            Cursor.visible = true;
+            SceneManager.LoadScene("GameOverScreen");
+        }
     }
 
     public void takeDamage(float x)
