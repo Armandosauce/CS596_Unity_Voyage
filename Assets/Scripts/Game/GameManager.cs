@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GameManager : MonoBehaviour {
+public class GameManager : MonoBehaviour
+{
 
     public static GameManager manager;
     public Text objectiveText;
@@ -14,10 +15,19 @@ public class GameManager : MonoBehaviour {
     public KeyCode left { get; set; }
     public KeyCode right { get; set; }
     */
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Debug.Log("Exit command received.");
+            GetComponent<MenuController>().QuitApp();
+        }
+    }
+
 
     private void Awake()
     {
-        if(manager == null)
+        if (manager == null)
         {
             DontDestroyOnLoad(this.gameObject);
             manager = this;

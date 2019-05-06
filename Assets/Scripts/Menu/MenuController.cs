@@ -8,7 +8,7 @@ public class MenuController : MonoBehaviour
 
     public void LoadByName(string sceneName)
     {
-
+        Debug.Log("Loading: " + sceneName);
         SceneManager.LoadScene(sceneName);
     }
 
