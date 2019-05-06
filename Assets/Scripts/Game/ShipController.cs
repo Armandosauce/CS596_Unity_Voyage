@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ShipController : MonoBehaviour
 {
@@ -69,6 +70,10 @@ public class ShipController : MonoBehaviour
             {
                 isComplete = true;
                 Debug.Log("Ship is complete!");
+                GameObject gameManager = GameObject.Find("GameManager");
+                gameManager.GetComponent<CrossHair>().enabled = false;
+                Cursor.visible = true;
+                SceneManager.LoadScene("CreditsScreen");
             }
             else
             {
