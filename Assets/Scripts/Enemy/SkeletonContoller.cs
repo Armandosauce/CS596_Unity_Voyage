@@ -30,12 +30,7 @@ public class SkeletonContoller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (dead)
-        {
-            timer -= Time.deltaTime;
-            if (timer <= 0) Destroy(this.gameObject);
-        }
-        else
+        if(!dead)
         {
             // Distance to the target
             dist = Vector3.Distance(target.transform.position, this.transform.position);
@@ -100,7 +95,6 @@ public class SkeletonContoller : MonoBehaviour
         if(collision.gameObject.tag == "EnemyProjectile")
         {
             anim.SetBool("isDead", true);
-            timer = 1.8f;
             dead = true;
         }
      
@@ -124,6 +118,13 @@ public class SkeletonContoller : MonoBehaviour
         {
             target.takeDamage(atkDamage);
         }
+    }
+
+    //Event triggered by animation
+
+    private void IsDead()
+    {
+        Destroy(this.gameObject);
     }
 }
 
