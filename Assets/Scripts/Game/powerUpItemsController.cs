@@ -28,7 +28,7 @@ public class powerUpItemsController : MonoBehaviour
         {
             audioSource.PlayOneShot(itemCollectedSound, 1f);
             float currentHealth = player.gameObject.GetComponent<Player>().currentHealth;
-            float maxHealth = player.gameObject.GetComponent<Player>().health;
+            float maxHealth = player.gameObject.GetComponent<Player>().startHealth;
 
             if (currentHealth < maxHealth)
             {

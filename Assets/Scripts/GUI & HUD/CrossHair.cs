@@ -24,7 +24,6 @@ public class CrossHair : MonoBehaviour
         if(imageAlpha != prevAlpha)
         {
             prevAlpha = imageAlpha;
-            Debug.Log("CHANGED ALPHA");
             image.SetPixels(modifyAlpha(image.GetPixels(), imageAlpha));
         }
 

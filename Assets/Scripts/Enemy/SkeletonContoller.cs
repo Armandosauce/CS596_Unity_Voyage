@@ -1,39 +1,30 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.AI;
 
-public class SkeletonContoller : MonoBehaviour
+public class SkeletonContoller : Enemy
 {
-    Animator anim;
-    public float lookRadius = 30f;  // Detection range for player
-
-    public Player target;   // Reference to the player
+    Animator anim;  // Detection range for player
     NavMeshAgent agent; // Reference to the NavMeshAgent
-    public float runningSpeed = 18f;
-    public float attackingSpeed = 1f;
-    public float atkDamage = 15f;
-    public float timer;
+
+    private Vector3 home;
     private float dist;
-    private bool dead;
-  
 
     // Use this for initialization
     void Start()
     {
         anim = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
-        dead = false;
+        home = this.transform.position;
+        isDead = false;
     }
-
 
     // Update is called once per frame
     void Update()
     {
-        if(!dead)
+        if(!isDead)
         {
             // Distance to the target
-            dist = Vector3.Distance(target.transform.position, this.transform.position);
+            dist = Vector3.Distance(player.transform.position, this.transform.position);
 
             // If inside the lookRadius
             if (dist <= lookRadius)
@@ -41,28 +32,33 @@ public class SkeletonContoller : MonoBehaviour
                 anim.SetBool("isIdle", false);
                 if (dist <= agent.stoppingDistance) // if within attack distance, 
                 {                                       //target and attack
-                    FaceTarget();
-                    agent.speed = attackingSpeed;
+                    this.FaceTarget();
                     agent.SetDestination(this.transform.position);
+                    
                     anim.SetBool("isAttacking", true);
                     anim.SetBool("isRunning", false);
                 }
                 else
                 {
-                    agent.speed = runningSpeed;
-                    agent.acceleration = runningSpeed;                //else chase them
-
                     anim.SetBool("isRunning", true);
                     anim.SetBool("isAttacking", false);
 
-                    agent.SetDestination(target.transform.position);
+                    agent.SetDestination(player.transform.position);
                 }
             }
             else
             {
-                anim.SetBool("isIdle", true);
-                anim.SetBool("isRunning", false);
-                agent.SetDestination(this.transform.position);
+                if(Mathf.Abs(Vector3.Distance(this.transform.position, home)) <= agent.stoppingDistance)
+                {
+                    anim.SetBool("isIdle", true);
+                    anim.SetBool("isRunning", false);
+                    agent.SetDestination(this.transform.position);
+
+                }
+                else
+                {
+                    agent.SetDestination(home);
+                }
             }
 
             if (anim.GetCurrentAnimatorStateInfo(0).IsName("Skill"))
@@ -72,56 +68,26 @@ public class SkeletonContoller : MonoBehaviour
             
         }
     }
-    
-
-
-    // Rotate to face the target
-    void FaceTarget()
-    {
-        Vector3 direction = (target.transform.position - transform.position).normalized;
-        Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
-        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
-    }
-
-    // Show the lookRadius in editor
-    void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, lookRadius);
-    }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.tag == "EnemyProjectile")
+        if (collision.gameObject.tag == "EnemyProjectile")
         {
             anim.SetBool("isDead", true);
-            dead = true;
-        }
-     
-    }
-
-    /*
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if(other.gameObject.tag == "Player" && anim.GetBool("isAttacking"))
-        {
-            target.takeDamage(atkDamage);
+            isDead = true;
         }
     }
-    */
 
-//Event triggered by the Animation "Attack" for the skeleton.
+    //Event triggered by the Animation "Attack" for the skeleton.
     private void EndAttack()
     {
         if(dist <= agent.stoppingDistance)
         {
-            target.takeDamage(atkDamage);
+            player.takeDamage(atkDamage);
         }
     }
 
     //Event triggered by animation
-
     private void IsDead()
     {
         Destroy(this.gameObject);

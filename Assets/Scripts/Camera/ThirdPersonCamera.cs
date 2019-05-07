@@ -4,11 +4,8 @@ using UnityEngine;
 
 public class ThirdPersonCamera : MonoBehaviour
 {
-    public Transform target;
-    public Transform camTransform;
+    public Transform target, player;
     
-    [SerializeField]
-    private Vector3 camOffset;
     [SerializeField]
     private float sensitivityX;
     [SerializeField]
@@ -18,39 +15,43 @@ public class ThirdPersonCamera : MonoBehaviour
     [SerializeField]
     private float yAngleMax;
     [SerializeField]
-    private Vector3 targetOffset;
+    private float smoothing;
     [SerializeField]
     private PlayerInputController input;
-
+    
     private Vector3 direction;
-    private Camera cam;
     private float currentX;
     private float currentY;
 
     // Start is called before the first frame update
     void Start()
     {
-        camTransform = this.transform;
-        cam = Camera.main;
+
     }
 
-    void Update()
+    void LateUpdate()
     {
-        currentX += input.Current.MouseInput.x;
-        currentY -= input.Current.MouseInput.y;
-
-        currentY = Mathf.Clamp(currentY, yAngleMin, yAngleMax);
+        camControl();
     }
 
     // Update is called once per frame
-    void LateUpdate()
+    void camControl()
     {
-        direction = camOffset;
+        currentX += input.Current.MouseInput.x * sensitivityX;
+        currentY -= input.Current.MouseInput.y * sensitivityY;
 
-        Quaternion rotation = Quaternion.Euler(currentY, currentX, 0);
+        currentY = Mathf.Clamp(currentY, yAngleMin, yAngleMax);
+        this.transform.LookAt(target);
+        
+        target.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(currentY, currentX, 0), Time.deltaTime * smoothing);
+        player.rotation = Quaternion.Euler(0, currentX, 0);
+
+
+        /*
         camTransform.position = target.position + rotation * direction;
 
         camTransform.LookAt(target.position + targetOffset);
-        
+        */
+
     }
 }

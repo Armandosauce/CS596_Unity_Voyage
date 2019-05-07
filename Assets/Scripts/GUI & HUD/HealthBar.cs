@@ -11,7 +11,7 @@ public class HealthBar : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        totalHealth = player.GetComponent<Player>().health;
+        totalHealth = player.GetComponent<Player>().startHealth;
         SetHealth(1);
 
     }

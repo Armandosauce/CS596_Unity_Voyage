@@ -5,21 +5,19 @@ using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
-    public float health;
+    public float startHealth;
 
-    public float currentHealth;
+    public float currentHealth { get; set; }
 
     // Start is called before the first frame update
     void Start()
     {
-        currentHealth = health;
+        currentHealth = startHealth;
     }
 
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(currentHealth);
-
         if(currentHealth <= 0)
         {
             GameObject gameManager = GameObject.Find("GameManager");

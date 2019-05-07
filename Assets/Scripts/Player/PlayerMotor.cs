@@ -12,7 +12,6 @@ public class PlayerMotor : MonoBehaviour
     public float moveSpeed;
     public float fallMultiplier;
     public float fallThreshold;
-    public Camera cam;
     public Vector3 rotationOffset;
     private CharacterController _controller;
     private float verticalVelocity;
@@ -48,8 +47,8 @@ public class PlayerMotor : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        handleVertical();
 
+        /*
         down = new Ray(transform.position, Vector3.down);
         if (input.Current.MoveInput != Vector3.zero && Physics.Raycast(down, out hit))
         {
@@ -64,48 +63,28 @@ public class PlayerMotor : MonoBehaviour
             }
 
         }
+        */
 
-        handleHorizontal();
-        playerMovement *= moveSpeed * Time.deltaTime;
+        //horizontal movement
+        handleXZaxes();
+
         //vertical movement
+        handleYaxis();
         playerMovement.y = verticalVelocity * Time.deltaTime;
 
-        _controller.Move(playerMovement);
+        Vector3 relative = this.transform.TransformDirection(playerMovement);
 
-        //Debug.Log(_isGrounded + ", " + playerMovement + "," + verticalVelocity);
+        _controller.Move(relative);
+       
     }
-
-
-    private void handleHorizontal()
+    
+    private void handleXZaxes()
     {
-        //horizontal movement
-
-        if (input.Current.MoveInput.x > 0)
-        {
-            playerMovement.x = cam.transform.right.x;
-            playerMovement.z = cam.transform.right.z;
-        }
-        else if (input.Current.MoveInput.x < 0)
-        {
-            playerMovement.x = -cam.transform.right.x;
-            playerMovement.z = -cam.transform.right.z;
-        }
-
-
-        if (input.Current.MoveInput.z > 0)
-        {
-            playerMovement.x = cam.transform.forward.x;
-            playerMovement.z = cam.transform.forward.z;
-        }
-        else if (input.Current.MoveInput.z < 0)
-        {
-            playerMovement.x = -cam.transform.forward.x;
-            playerMovement.z = -cam.transform.forward.z;
-        }
-
+        playerMovement.x = input.Current.MoveInput.x * moveSpeed * Time.deltaTime;
+        playerMovement.z = input.Current.MoveInput.z * moveSpeed * Time.deltaTime;       
     }
 
-    private void handleVertical()
+    private void handleYaxis()
     {
         groundedRemember -= Time.deltaTime;
         jumpPressedRemember -= Time.deltaTime;

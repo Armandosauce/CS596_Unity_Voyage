@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class EvasiveController : MonoBehaviour { 
+public class EvasiveController : Enemy { 
 
-    public float lookRadius = 100f;  // Detection range for player
-
+    
     Transform target;   // Reference to the player
     NavMeshAgent agent; // Reference to the NavMeshAgent
     GameObject prefab;
@@ -16,9 +15,10 @@ public class EvasiveController : MonoBehaviour {
     public float enemySpeed = 0.1f;
     public float projectileSpeed = 2700f;
     public float shootRadius = 50f;
-    bool shoot;
 
-
+    private float coolDownTimer;
+    private bool shoot;
+    
     public Transform ProjectileSpawn
     {
         get
@@ -37,6 +37,7 @@ public class EvasiveController : MonoBehaviour {
         prefab = Resources.Load("projectile") as GameObject;
         target = PlayerManager.instance.player.transform;
         agent = GetComponent<NavMeshAgent>();
+        coolDownTimer = coolDown;
     }
 
     // Update is called once per frame
@@ -51,19 +52,19 @@ public class EvasiveController : MonoBehaviour {
             if (distance <= agent.stoppingDistance)
             {
                 RunAway();
-                coolDown = 1f;
+                coolDownTimer = coolDown;
             }
             else    //chase until within shooting distance
             {
                 if (distance <= shootRadius)
                 {
-                    coolDown -= Time.deltaTime;
+                    coolDownTimer -= Time.deltaTime;
                     shoot = true;
                     FaceTarget();
-                    if (coolDown <= 0)
+                    if (coolDownTimer <= 0)
                     {
                         ShootTarget();
-                        coolDown = 2f;
+                        coolDownTimer = coolDown;
                     }
                 }
                 else

@@ -5,17 +5,16 @@ using UnityEngine.AI;
 
 /* Controls the Enemy AI */
 
-public class ProjectileController : MonoBehaviour
+public class ProjectileController : Enemy
 {
-
-    public float lookRadius = 100f;  // Detection range for player
-
     Transform target;   // Reference to the player
     NavMeshAgent agent; // Reference to the NavMeshAgent
     GameObject prefab;
     public Transform projectileSpawn;
-    float coolDown = 1.5f;
+    public float coolDown = 1.5f;
     public float projectileSpeed = 2700f;
+
+    private float coolDownTimer;
 
     public Transform ProjectileSpawn
     {
@@ -35,6 +34,7 @@ public class ProjectileController : MonoBehaviour
         prefab = Resources.Load("projectile") as GameObject;
         target = PlayerManager.instance.player.transform;
         agent = GetComponent<NavMeshAgent>();
+        coolDownTimer = coolDown;
     }
 
     // Update is called once per frame
@@ -46,14 +46,14 @@ public class ProjectileController : MonoBehaviour
         // If inside the lookRadius, face and shoot
         if (distance <= lookRadius)
         {
-            coolDown -= Time.deltaTime;
+            coolDownTimer -= Time.deltaTime;
             Vector3 direction = (target.position - transform.position).normalized;
             Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
             transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
-            if (coolDown <= 0)
+            if (coolDownTimer <= 0)
             {
                 ShootTarget();
-                coolDown = 2f;
+                coolDownTimer = coolDown;
             }
         }
     }
