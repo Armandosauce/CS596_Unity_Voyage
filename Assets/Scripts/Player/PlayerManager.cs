@@ -12,15 +12,17 @@ public class PlayerManager : MonoBehaviour
 
     public static PlayerManager instance;
 
+    [HideInInspector]
+    public Player player;
+
     void Awake()
     {
         instance = this;
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
     }
 
     #endregion
-
-    public GameObject player;
-
+    
     public void KillPlayer()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);

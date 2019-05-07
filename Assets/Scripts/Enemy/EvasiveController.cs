@@ -88,7 +88,7 @@ public class EvasiveController : Enemy {
     }
 
     //false to chase, true to stand and shoot
-    void FaceTarget()
+    private new void FaceTarget()
     { 
         Vector3 direction = (target.position - transform.position).normalized;
         Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
