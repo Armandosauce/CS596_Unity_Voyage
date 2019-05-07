@@ -30,6 +30,8 @@ public class Player : MonoBehaviour
             SceneManager.LoadScene("GameOverScreen");
         }
 
+        //apply some visual effect to show the player was damaged
+        //maybe particle effects?
         if(!isVulnerable)
         {
 

@@ -8,6 +8,7 @@ public struct PlayerInput
     public Vector2 MouseInput;
     public bool JumpInput;
     public bool RunInput;
+    public bool InventoryInput;
 }
 
 public class PlayerInputController : MonoBehaviour {
@@ -17,6 +18,7 @@ public class PlayerInputController : MonoBehaviour {
     private Vector2 mouseInput;
     private bool jumpInput;
     private bool runInput;
+    private bool inventoryInput;
 
 	// Use this for initialization
 	void Start () {
@@ -34,12 +36,15 @@ public class PlayerInputController : MonoBehaviour {
 
         runInput = Input.GetButton("Run");
 
+        inventoryInput = Input.GetButtonDown("Inventory");
+
         Current = new PlayerInput()
         {
             MoveInput = moveInput,
             MouseInput = mouseInput,
             JumpInput = jumpInput,
-            RunInput = runInput
+            RunInput = runInput,
+            InventoryInput = inventoryInput
         };
 	}
 }
