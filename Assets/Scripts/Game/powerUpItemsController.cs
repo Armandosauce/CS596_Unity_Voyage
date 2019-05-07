@@ -24,7 +24,7 @@ public class powerUpItemsController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.name == "PlayerCharacter")
+        if (collision.gameObject.tag == "Player")
         {
             audioSource.PlayOneShot(itemCollectedSound, 1f);
             float currentHealth = player.gameObject.GetComponent<Player>().currentHealth;

@@ -37,11 +37,10 @@ public class ShipController : MonoBehaviour
     {
 
     }
-
-    private void OnCollisionEnter(Collision collision)
+  
+    private void OnCollisionEnter(Collision other)
     {
-        // Consider making it a trigger instead of using RigidBody for collision
-        if (collision.gameObject.name == "PlayerCharacter")
+        if (other.gameObject.tag == "Player")
         {
             missingParts = 0;
             int deliveredParts = 0;
