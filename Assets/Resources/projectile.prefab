@@ -13935,8 +13935,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef34ea96f0e08e5488d7223a1a20b8c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
   damage: 20
+  activeTime: 4
 --- !u!54 &7140149489877559980
 Rigidbody:
   m_ObjectHideFlags: 0

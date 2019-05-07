@@ -779,7 +779,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f05dc46b7e6ccf45be6ac75aeccc69a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 755290411}
+  player: {fileID: 0}
 --- !u!114 &103211851
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7580,10 +7580,10 @@ MonoBehaviour:
   target: {fileID: 1543328279}
   player: {fileID: 755290416}
   sensitivityX: 3.4
-  sensitivityY: 2.25
+  sensitivityY: 2.4
   yAngleMin: -20
   yAngleMax: 50
-  smoothing: 8
+  smoothing: 12
   input: {fileID: 755290414}
 --- !u!4 &1328745942 stripped
 Transform:
@@ -8374,7 +8374,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1543328279}
   m_Layer: 10
-  m_Name: Target
+  m_Name: Camera Target
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
