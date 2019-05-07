@@ -9,14 +9,12 @@ public class DestroyProjectile : MonoBehaviour {
 
     private void Start()
     {
-        StartCoroutine(timedDestroy());
+         StartCoroutine(timedDestroy());
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider collision)
     {
-        if(collision.gameObject.tag != "Enemy")
-            Destroy(this.gameObject);
-        if (collision.gameObject.tag == "PlayerHitbox")
+        if (collision.gameObject.tag == "Player")
         {
             PlayerManager.instance.player.takeDamage(damage);
             Destroy(this.gameObject);

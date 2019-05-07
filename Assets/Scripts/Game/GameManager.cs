@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
 
-    public static GameManager manager;
+    public static GameManager instance;
     public Text objectiveText;
     /*
     public KeyCode jump { get; set; }
@@ -28,10 +28,10 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        if (manager == null)
+        if (instance == null)
         {
             DontDestroyOnLoad(this.gameObject);
-            manager = this;
+            instance = this;
             Invoke("DisableObjectiveText", 4f);
         }
         else

@@ -97,7 +97,8 @@ public class MushController : Enemy
         GameObject projectileInstance;
         projectileInstance = Instantiate(prefab, projectileSpawn.position, projectileSpawn.rotation);
         Rigidbody rb = projectileInstance.GetComponent<Rigidbody>();
-        rb.AddForce(projectileSpawn.forward * projectileSpeed);
+        Vector3 direction = (target.position - projectileSpawn.position).normalized;
+        rb.AddForce(direction * projectileSpeed);
     }
 
 
@@ -109,11 +110,5 @@ public class MushController : Enemy
             player.takeDamage(atkDamage);
         }
     }
-
-    // Show the lookRadius in editor
-    void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, lookRadius);
-    }
+    
 }

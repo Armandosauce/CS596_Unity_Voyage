@@ -69,9 +69,9 @@ public class SkeletonContoller : Enemy
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if (collision.gameObject.tag == "EnemyProjectile")
+        if (other.gameObject.tag == "EnemyProjectile")
         {
             anim.SetBool("isDead", true);
             isDead = true;
