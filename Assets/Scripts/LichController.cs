@@ -108,7 +108,8 @@ public class LichController : Enemy
         GameObject projectileInstance;
         projectileInstance = Instantiate(prefab, projectileSpawn.position, projectileSpawn.rotation);
         Rigidbody rb = projectileInstance.GetComponent<Rigidbody>();
-        rb.AddForce(projectileSpawn.forward * projectileSpeed);
+        Vector3 direction = (target.position - projectileInstance.transform.position).normalized;
+        rb.AddForce(direction * projectileSpeed);
     }
 
     //event on animation

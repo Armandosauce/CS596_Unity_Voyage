@@ -4540,7 +4540,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 50
-  inv_time: 0.5
+  inv_time: 0.25
   player: {fileID: 755290413}
   lookRadius: 120
   runningSpeed: 0
@@ -4589,28 +4589,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &666032200
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 666032194}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 640fdb6c543b07343bdd23dd5f546399, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 0
-  inv_time: 0
-  player: {fileID: 0}
-  lookRadius: 0
-  runningSpeed: 0
-  attackingSpeed: 0
-  atkDamage: 0
-  projectileSpawn: {fileID: 0}
-  coolDown: 1.5
-  projectileSpeed: 2700
 --- !u!4 &669490207 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 843dfa85311419743a05886eafe9671c,
