@@ -14,7 +14,7 @@ public class DestroyProjectile : MonoBehaviour {
             Destroy(this.gameObject);
         if (collision.gameObject.tag == "Player")
         {
-            collision.gameObject.GetComponent<Player>().takeDamage(damage);
+            collision.gameObject.GetComponentInParent<Player>().takeDamage(damage);
             Destroy(this.gameObject);
         }
     }
