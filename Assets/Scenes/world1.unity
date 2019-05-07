@@ -4408,7 +4408,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 016134d27240b43489c051f62ec79813, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startHealth: 1000
+  startHealth: 100
 --- !u!114 &755290414
 MonoBehaviour:
   m_ObjectHideFlags: 0
