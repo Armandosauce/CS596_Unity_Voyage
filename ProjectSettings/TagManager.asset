@@ -9,6 +9,7 @@ TagManager:
   - Enemy Weapon
   - EnemyProjectile
   - PlayerHitbox
+  - Planet
   layers:
   - Default
   - TransparentFX

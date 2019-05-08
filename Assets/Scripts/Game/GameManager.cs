@@ -56,7 +56,6 @@ public class GameManager : MonoBehaviour
     {
         if(scene.name == "world1")
         {
-            GetComponent<CrossHair>().enabled = true;
         }
     }
 

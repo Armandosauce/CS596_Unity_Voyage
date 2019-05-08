@@ -4,6 +4,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(PlayerMotor))]
 [RequireComponent(typeof(PlayerInputController))]
+[RequireComponent(typeof(Animator))]
 public class PlayerAnim : MonoBehaviour {
 
     public Animator anim;
