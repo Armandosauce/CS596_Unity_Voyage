@@ -1,3 +1,7 @@
+A build of this project can be created by first importing this folder into Unity as a new project. Then selecting File>Build Settings.., then export to desired platform (Windows, Mac, Linux)
+
+A precompiled version can be found in Releases/ folder
+
 Title
 ======
 Voyage
